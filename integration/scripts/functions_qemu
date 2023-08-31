@@ -59,6 +59,7 @@ function build_guest_image() {
     elementes="$elementes pip-cache"
     elementes="$elementes guest-agent"
     elementes="$elementes ${guest_os}-docker"
+    elementes="$elementes ${guest_os}-mysql"
 
     if [[ -n ${root_password} ]]; then
         elementes="$elementes root-passwd"

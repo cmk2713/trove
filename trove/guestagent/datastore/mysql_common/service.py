@@ -18,6 +18,9 @@ import re
 import sqlalchemy
 import urllib
 
+import sys
+import subprocess
+
 from oslo_log import log as logging
 from oslo_utils import encodeutils
 from sqlalchemy import event
@@ -70,6 +73,7 @@ class BaseMySqlAppStatus(service.BaseDbStatus):
         status = docker_util.get_container_status(self.docker_client)
         if status == "running":
             root_pass = service.BaseDbApp.get_auth_password(file="root.cnf")
+            LOG.info(f"---------get_actual_db_status-------- = root password: {root_pass}")
             cmd = 'mysql -uroot -p%s -e "select 1;"' % root_pass
             try:
                 docker_util.run_command(self.docker_client, cmd)
@@ -589,7 +593,7 @@ class BaseMySqlApp(service.BaseDbApp):
         user = "%s:%s" % (CONF.database_service_uid, CONF.database_service_uid)
 
         # Create folders for mysql on localhost
-        for folder in ['/etc/mysql', '/var/run/mysqld']:
+        for folder in ['/etc/mysql', '/etc/mysql/mysql.conf.d', '/var/run/mysqld']:
             operating_system.ensure_directory(
                 folder, user=CONF.database_service_uid,
                 group=CONF.database_service_uid, force=True,
@@ -610,6 +614,14 @@ class BaseMySqlApp(service.BaseDbApp):
         for port_range in tcp_ports:
             for port in port_range:
                 ports[f'{port}/tcp'] = port
+        
+        #Override configuration
+        overrides = {}
+        from distutils.version import LooseVersion
+        ver = LooseVersion(ds_version)
+        if ver.version[0] >=8:
+            overrides["default_authentication_plugin"] = "caching_sha2_password"
+        self.update_overrides(overrides)
 
         try:
             docker_util.start_container(
@@ -826,7 +838,30 @@ class BaseMySqlApp(service.BaseDbApp):
         """Upgrade the database."""
         new_version = upgrade_info.get('datastore_version')
         if new_version == CONF.datastore_version:
-            return
+             return
+        
+        #Get root password for upgrade
+        try:
+            LOG.info('Checking Root Authentication is enabled')
+            root_pass = upgrade_info.get('root_pass')
+            LOG.info(f'Root_Pass = {root_pass}')
+        except:
+            raise Exception("root is unable")
+        
+        # #Check whether upgrading is possible
+        from distutils.version import LooseVersion
+        # cur_ver = LooseVersion(CONF.datastore_version).version
+        new_ver = LooseVersion(new_version).version
+        
+        # LOG.info('Checking it is possible to upgrade Mysql')
+        # LOG.info('''sudo mysqlsh -h 127.0.0.1 -u root -p%s -e "util.checkForServerUpgrade('root@127.0.0.1:3306',{'password':'%s','targetVersion':'%s', 'outputFormat':'JSON'});"''',root_pass, root_pass, new_version)
+        # upgradecheck = subprocess.Popen(('''sudo mysqlsh -h 127.0.0.1 -u root -p%s -e "util.checkForServerUpgrade('root@127.0.0.1:3306',{'password':'%s','targetVersion':'%s', 'outputFormat':'JSON'});"''',root_pass, root_pass, new_version), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # (stdout, stderr) = upgradecheck.communicate()
+        # LOG.info(f'upgrade check result : {upgradecheck.returncode}')
+        # LOG.info(f'upgrade check stdout : {stdout}')
+        # LOG.info(f'upgrade check stderr : {stderr}')
+        # if upgradecheck.returncode != 0 :
+        #     raise Exception("upgrading mysql is unavailable")
 
         LOG.info('Stopping db container for upgrade')
         self.stop_db()
@@ -839,7 +874,17 @@ class BaseMySqlApp(service.BaseDbApp):
 
         LOG.info('Starting new db container with version %s for upgrade',
                  new_version)
+        #Waiting until db is running
         self.start_db(update_db=True, ds_version=new_version)
+
+        #if new mysql version <8.0.16, exec 'mysql_upgrade' manually
+        LOG.info(f'Checking new DB version {new_version} is under "8.0.16"')
+        LOG.info(f'new_ver[0]=="8": {new_ver[0]} {new_ver[0]==8}')
+        LOG.info(f'new_ver[1]=="0": {new_ver[1]} {new_ver[1]==0}')
+        LOG.info(f'new_ver[2]<"16": {new_ver[2]} {new_ver[2]<16}')
+        if new_ver[0]==8 and new_ver[1]==0 and new_ver[2]<16:
+            LOG.info(f'Excuting "mysql_upgrade -uroot -p{root_pass}" because new version is {new_version}')
+            docker_util.run_command(self.docker_client, f'mysql_upgrade -uroot -p{root_pass}')
 
 
 class BaseMySqlRootAccess(object):
@@ -892,6 +937,7 @@ class BaseMySqlRootAccess(object):
 
             t = text(str(g))
             client.execute(t)
+            self.mysql_app.save_password('root', user._password)
             return user.serialize()
 
     def disable_root(self):

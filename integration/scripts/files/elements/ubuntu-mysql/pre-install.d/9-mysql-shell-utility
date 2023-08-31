@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+set -o xtrace
+
+apt-get update
+
+apt-get install wget gnupg -y
+
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.26-1_all.deb
+
+export DEBIAN_FRONTEND=noninteractive
+export DEBIAN_PRIORITY=critical
+
+sudo -E dpkg -i mysql-apt-config_0.8.26-1_all.deb
+
+apt-get update
+
+apt-get -y install mysql-shell
