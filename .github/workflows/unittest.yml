@@ -1,0 +1,22 @@
+name: Test Task Manager
+
+on: 
+  push:
+    branches:
+      - develop/cmk2713
+  workflow_dispatch:
+
+jobs:
+  unittest:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+    
+    - run: |
+        echo ${{ github.event.head_commit.id }}
+        git checkout ${{ github.event.head_commit.id }}
+        echo "COMMIT_ID=$(echo ${{ github.event.head_commit.id }})" >> $GITHUB_ENV
+    
+    - name: unittest with coverage
+      run: |
+        tox -e cover
