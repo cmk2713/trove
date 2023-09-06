@@ -110,6 +110,7 @@ class MySqlManager(manager.Manager):
         :param backup_info: a dictionary containing the db instance id of the
                             backup task, location, type, and other data.
         """
+        LOG.info(f"backup info:{backup_info}")
         LOG.info(f"Creating backup {backup_info['id']}")
         with EndNotification(context):
             # Set /var/run/mysqld to allow localhost access.
@@ -326,8 +327,9 @@ class MySqlManager(manager.Manager):
         LOG.info('Starting to upgrade database, upgrade_info: %s',
                  upgrade_info)
         user = self.adm.enable_root()
-        LOG.info(f"USER = {user}")
-        upgrade_info.update({"root_pass":user.get('_password')})
+        LOG.info(f"User:{user}")
+        upgrade_info.update({"root_pass":user.get("_password")})
+
         self.app.upgrade(upgrade_info)
 
     def rebuild(self, context, ds_version, config_contents=None,

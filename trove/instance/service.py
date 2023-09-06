@@ -414,6 +414,8 @@ class InstanceController(wsgi.Controller):
         else:
             datastore, datastore_version = ds_models.get_datastore_version(
                 **datastore_args)
+        
+        LOG.info(f"datastore_version:{datastore_version}, datastore:{datastore}")
 
         # If only image_tags is configured in the datastore version, get
         # the image ID using the tags.
@@ -533,12 +535,34 @@ class InstanceController(wsgi.Controller):
                 LOG.warning(f"Same datastore version {datastore_version.name} "
                             f"for upgrading")
                 return
-
             context.notification = (
                 notification.DBaaSInstanceUpgrade(context, request=req))
             with StartNotification(context, instance_id=instance.id,
                                    datastore_version_id=datastore_version.id):
-                instance.upgrade(datastore_version)
+                """Backup instance before upgrading"""
+                context.notification = notification.DBaaSBackupCreate(
+                    context, request=req)
+                backup_name=f"upgrade-backup-{instance.id}"
+                backup_description=f"pre-backup for upgrading {instance.id}"
+                swift_container=f'upgrade-backup-container-{instance.id}'
+                
+
+                with StartNotification(context, name=f"upgrade-backup-{instance.id}", instance_id=instance.id,
+                               description=f"pre-backup for upgrading {instance.id}", parent_id=None):
+                    backup = backup_model.create(context, instance.id, backup_name, backup_description,
+                                        parent_id=None, incremental=0,
+                                        swift_container=swift_container,
+                                        restore_from=None)
+                    """ try raise 필요 """
+                    def backupFinished():
+                        backupInfo =  backup_model.get_by_id(context=req.environ[wsgi.CONTEXT_KEY], backup_id=backup.id)
+                        LOG.info(f"Backup Info state: {backupInfo.state}")
+                        if backupInfo.state == "COMPLETED":
+                            return True
+                        else:
+                            return False
+                    utils.poll_until(backupFinished, sleep_time=5, time_out=300)
+                    instance.upgrade(datastore_version)
         elif 'access' in kwargs:
             instance.update_access(kwargs['access'])
 

@@ -12,13 +12,18 @@
 #    See the License for the specific language governing permissions and
 #    limitations under the License.
 import semantic_version
+from oslo_log import log as logging
 
 from trove.common import cfg
 from trove.guestagent.datastore.mysql_common import service
 from trove.guestagent.utils import mysql as mysql_util
 
-CONF = cfg.CONF
+import sys
+import subprocess
+from trove.guestagent.utils import docker as docker_util
 
+CONF = cfg.CONF
+LOG = logging.getLogger(__name__)
 
 class MySqlAppStatus(service.BaseMySqlAppStatus):
     def __init__(self, docker_client):
@@ -89,6 +94,71 @@ class MySqlApp(service.BaseMySqlApp):
             strategy = 'xtrabackup'
 
         return strategy
+    
+    def upgrade(self, upgrade_info):
+        """Upgrade the database."""
+        new_version = upgrade_info.get('datastore_version')
+        if new_version == CONF.datastore_version:
+             return
+        
+        #Get root password for upgrade
+        try:
+            LOG.info('Checking Root Authentication is enabled')
+            root_pass = upgrade_info.get('root_pass')
+            LOG.info(f'Root_Pass = {root_pass}')
+        except:
+            raise Exception("root is unable")
+        
+        # #Check whether upgrading is possible
+        from distutils.version import LooseVersion
+        # cur_ver = LooseVersion(CONF.datastore_version).version
+        new_ver = LooseVersion(new_version).version
+        
+        if new_ver[0]==8 and new_ver[1]==0 and new_ver[2]>=11:
+            LOG.info('Checking it is possible to upgrade Mysql')
+            LOG.info('''sudo mysqlsh -h 172.17.0.1 -uroot -p%s -e "util.checkForServerUpgrade('root@172.17.0.1:3306',{'password':'','targetVersion':'%s', 'outputFormat':'JSON'});"''',root_pass, root_pass, new_version)
+            upgradeCheckCmd='''sudo mysqlsh -h 172.17.0.1 -uroot -p'''+root_pass+ """ -e "util.checkForServerUpgrade('root@172.17.0.1:3306',{'password':'"""+root_pass+"""','targetVersion':'"""+new_version+"""', 'outputFormat':'JSON'});" """
+            upgradecheck = subprocess.Popen(upgradeCheckCmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            LOG.info(f"subprocess running cmd:{upgradecheck.args}")
+            (stdout, stderr) = upgradecheck.communicate()
+            LOG.info(f'upgrade check result : {upgradecheck.returncode}')
+            LOG.info(f'upgrade check stdout : {stdout}')
+            LOG.info(f'upgrade check stderr : {stderr}')
+            if upgradecheck.returncode != 0 :
+                raise Exception("upgrading mysql is unavailable")
+
+        LOG.info('Stopping db container for upgrade')
+        self.stop_db()
+
+        LOG.info('Deleting db container for upgrade')
+        docker_util.remove_container(self.docker_client)
+
+        LOG.info('Remove unused images before starting new db container')
+        docker_util.prune_images(self.docker_client)
+
+        LOG.info('Starting new db container with version %s for upgrade',
+                 new_version)
+        #Waiting until db is running
+        self.start_db(update_db=True, ds_version=new_version)
+
+
+        # mysql version under 8.0.16 is not supported
+        # #if new mysql version <8.0.16, exec 'mysql_upgrade' manually
+        # LOG.info(f'Checking new DB version {new_version} is under "8.0.16"')
+        # LOG.info(f'new_ver[0]=="8": {new_ver[0]} {new_ver[0]==8}')
+        # LOG.info(f'new_ver[1]=="0": {new_ver[1]} {new_ver[1]==0}')
+        # LOG.info(f'new_ver[2]<"16": {new_ver[2]} {new_ver[2]<16}')
+        # if new_ver[0]==8 and new_ver[1]==0 and new_ver[2]<16:
+        #     LOG.info(f'Excuting "mysql_upgrade -uroot -p{root_pass}" because new version is {new_version}')
+        #     docker_util.run_command(self.docker_client, f'mysql_upgrade -uroot -p{root_pass}')
+
+        #     LOG.info('Stopping db container for upgrade')
+        #     self.stop_db()
+
+        #     LOG.info('Starting new db container with version %s for upgrade',
+        #          new_version)
+        #     #Waiting until db is running
+        #     self.start_db(update_db=True, ds_version=new_version)
 
 
 class MySqlRootAccess(service.BaseMySqlRootAccess):

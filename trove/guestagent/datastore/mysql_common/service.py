@@ -18,9 +18,6 @@ import re
 import sqlalchemy
 import urllib
 
-import sys
-import subprocess
-
 from oslo_log import log as logging
 from oslo_utils import encodeutils
 from sqlalchemy import event
@@ -833,58 +830,6 @@ class BaseMySqlApp(service.BaseDbApp):
         with mysql_util.SqlClient(self.get_engine()) as client:
             q = "set global read_only = %s" % read_only
             client.execute(text(str(q)))
-
-    def upgrade(self, upgrade_info):
-        """Upgrade the database."""
-        new_version = upgrade_info.get('datastore_version')
-        if new_version == CONF.datastore_version:
-             return
-        
-        #Get root password for upgrade
-        try:
-            LOG.info('Checking Root Authentication is enabled')
-            root_pass = upgrade_info.get('root_pass')
-            LOG.info(f'Root_Pass = {root_pass}')
-        except:
-            raise Exception("root is unable")
-        
-        # #Check whether upgrading is possible
-        from distutils.version import LooseVersion
-        # cur_ver = LooseVersion(CONF.datastore_version).version
-        new_ver = LooseVersion(new_version).version
-        
-        # LOG.info('Checking it is possible to upgrade Mysql')
-        # LOG.info('''sudo mysqlsh -h 127.0.0.1 -u root -p%s -e "util.checkForServerUpgrade('root@127.0.0.1:3306',{'password':'%s','targetVersion':'%s', 'outputFormat':'JSON'});"''',root_pass, root_pass, new_version)
-        # upgradecheck = subprocess.Popen(('''sudo mysqlsh -h 127.0.0.1 -u root -p%s -e "util.checkForServerUpgrade('root@127.0.0.1:3306',{'password':'%s','targetVersion':'%s', 'outputFormat':'JSON'});"''',root_pass, root_pass, new_version), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        # (stdout, stderr) = upgradecheck.communicate()
-        # LOG.info(f'upgrade check result : {upgradecheck.returncode}')
-        # LOG.info(f'upgrade check stdout : {stdout}')
-        # LOG.info(f'upgrade check stderr : {stderr}')
-        # if upgradecheck.returncode != 0 :
-        #     raise Exception("upgrading mysql is unavailable")
-
-        LOG.info('Stopping db container for upgrade')
-        self.stop_db()
-
-        LOG.info('Deleting db container for upgrade')
-        docker_util.remove_container(self.docker_client)
-
-        LOG.info('Remove unused images before starting new db container')
-        docker_util.prune_images(self.docker_client)
-
-        LOG.info('Starting new db container with version %s for upgrade',
-                 new_version)
-        #Waiting until db is running
-        self.start_db(update_db=True, ds_version=new_version)
-
-        #if new mysql version <8.0.16, exec 'mysql_upgrade' manually
-        LOG.info(f'Checking new DB version {new_version} is under "8.0.16"')
-        LOG.info(f'new_ver[0]=="8": {new_ver[0]} {new_ver[0]==8}')
-        LOG.info(f'new_ver[1]=="0": {new_ver[1]} {new_ver[1]==0}')
-        LOG.info(f'new_ver[2]<"16": {new_ver[2]} {new_ver[2]<16}')
-        if new_ver[0]==8 and new_ver[1]==0 and new_ver[2]<16:
-            LOG.info(f'Excuting "mysql_upgrade -uroot -p{root_pass}" because new version is {new_version}')
-            docker_util.run_command(self.docker_client, f'mysql_upgrade -uroot -p{root_pass}')
 
 
 class BaseMySqlRootAccess(object):

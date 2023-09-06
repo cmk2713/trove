@@ -16,12 +16,15 @@
 
 from oslo_log import log as logging
 
+from trove.common import cfg
 from trove.guestagent.datastore.mysql_common import service as mysql_service
 from trove.guestagent.utils import mysql as mysql_util
 from trove.common import utils
 from trove.common import exception
+from trove.guestagent.utils import docker as docker_util
 
 LOG = logging.getLogger(__name__)
+CONF = cfg.CONF
 
 
 class MariaDBApp(mysql_service.BaseMySqlApp):
@@ -79,6 +82,49 @@ class MariaDBApp(mysql_service.BaseMySqlApp):
         cmd = "SELECT MASTER_GTID_WAIT('%s')" % txn
         with mysql_util.SqlClient(self.get_engine()) as client:
             client.execute(cmd)
+
+    def upgrade(self, upgrade_info):
+        """Upgrade the database."""
+        new_version = upgrade_info.get('datastore_version')
+        if new_version == CONF.datastore_version:
+             return
+        
+        #Get root password for upgrade
+        try:
+            LOG.info('Checking Root Authentication is enabled')
+            root_pass = upgrade_info.get('root_pass')
+            LOG.info(f'Root_Pass = {root_pass}')
+        except:
+            raise Exception("root is unable")
+        
+        # #Check whether upgrading is possible
+        from distutils.version import LooseVersion
+        # cur_ver = LooseVersion(CONF.datastore_version).version
+        new_ver = LooseVersion(new_version).version
+
+        LOG.info('Stopping db container for upgrade')
+        self.stop_db()
+
+        LOG.info('Deleting db container for upgrade')
+        docker_util.remove_container(self.docker_client)
+
+        LOG.info('Remove unused images before starting new db container')
+        docker_util.prune_images(self.docker_client)
+
+        LOG.info('Starting new db container with version %s for upgrade',
+                 new_version)
+        #Waiting until db is running
+        self.start_db(update_db=True, ds_version=new_version)
+        LOG.info(f'Excuting "mysql_upgrade -uroot -p{root_pass}" because new version is {new_version}')
+        docker_util.run_command(self.docker_client, f'mysql_upgrade -uroot -p{root_pass}')
+
+        LOG.info('Stopping db container for upgrade')
+        self.stop_db()
+
+        LOG.info('Starting new db container with version %s for upgrade',
+                new_version)
+        #Waiting until db is running
+        self.start_db(update_db=True, ds_version=new_version)
 
 
 class MariaDBRootAccess(mysql_service.BaseMySqlRootAccess):

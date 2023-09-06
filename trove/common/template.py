@@ -65,15 +65,20 @@ class SingleInstanceConfigTemplate(object):
         #                    bit iffy and I believe will change soon, so I'm
         #                    creating a dictionary here for jinja to consume
         #                    rather than pass in the datastore version object.
+        # convert minor ver to major ver
+        from distutils.version import LooseVersion
+        ver = LooseVersion(self.datastore_version.name).version
+        LOG.info(f"template version:{ver[0]}.{ver[1]}")
         self.datastore_dict = {
             'name': self.datastore_version.datastore_name,
             'manager': self.datastore_version.manager,
-            'version': self.datastore_version.name,
+            'version': f"{ver[0]}.{ver[1]}",
         }
         self.instance_id = instance_id
 
+    
     def get_template(self):
-        patterns = ['{name}/{version}/{template_name}',
+        patterns = ['{manager}/{version}/{template_name}',
                     '{name}/{template_name}',
                     '{manager}/{template_name}']
         context = self.datastore_dict.copy()
