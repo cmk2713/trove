@@ -346,6 +346,7 @@ sync_binlog = 1
 sync_master_info = 10000
 sync_relay_log = 10000
 sync_relay_log_info = 10000
+thread_stack = 192K
 thread_cache_size = {{ (4 * flavor['ram']/512)|int }}
 key_buffer_size = {{ (50 * flavor['ram']/512)|int }}M
 max_allowed_packet = {{ (1024 * flavor['ram']/512)|int }}K

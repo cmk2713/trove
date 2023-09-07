@@ -1,0 +1,1967 @@
+{
+    "configuration-parameters":[
+     {
+      "name": "character-set-client-handshake",
+      "restart_required": true,
+      "type": "boolean"
+     },
+     {
+      "name": "slave-skip-errors",
+      "restart_required": true,
+      "type": "string"
+     },
+     {
+      "name": "sysdate-is-now",
+
+      "restart_required": true,
+      "type": "boolean"
+     },
+     {
+      "name": "autocommit",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "avoid_temporal_upgrade",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "big_tables",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "binlog_cache_size",
+      "min": 4096,
+      "max": "18446744073709547520",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "binlog_checksum",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "binlog_direct_non_transactional_updates",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "binlog_error_action",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "binlog_format",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "binlog_group_commit_sync_delay",
+      "min": 0,
+      "max": 1000000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "binlog_group_commit_sync_no_delay_count",
+      "min": 0,
+      "max": 100000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "binlog_row_image",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "binlog_rows_query_log_events",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "binlog_stmt_cache_size",
+      "min": 4096,
+      "max": "18446744073709547520",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "block_encryption_mode",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "bulk_insert_buffer_size",
+      "min": 0,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "character_set_server",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "check_proxy_users",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "collation_server",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "concurrent_insert",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "connect_timeout",
+      "min": 2,
+      "max": 31536000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "datadir",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "default_authentication_plugin",
+
+      "restart_required": true,
+      "type": "boolean"
+     },
+     {
+      "name": "default_password_lifetime",
+      "min": 0,
+      "max": 65535,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "default_storage_engine",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "default_tmp_storage_engine",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "default_week_format",
+      "min": 0,
+      "max": 7,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "delay_key_write",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "delayed_insert_limit",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "delayed_queue_size",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "disabled_storage_engines",
+
+      "restart_required": true,
+      "type": "string"
+     },
+     {
+      "name": "div_precision_increment",
+      "min": 0,
+      "max": 30,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "event_scheduler",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "expire_logs_days",
+      "min": 0,
+      "max": 99,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "explicit_defaults_for_timestamp",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "flush",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "flush_time",
+      "min": 0,
+      "max": 31536000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "ft_boolean_syntax",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "ft_max_word_len",
+      "min": 10,
+      "max": 84,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "ft_min_word_len",
+      "min": 1,
+      "max": 84,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "general_log",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "group_concat_max_len",
+      "min": 4,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "init_connect",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "init_slave",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "innodb_adaptive_flushing",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_adaptive_flushing_lwm",
+      "min": 0,
+      "max": 70,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_adaptive_hash_index",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_adaptive_hash_index_parts",
+      "min": 1,
+      "max": 512,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_adaptive_max_sleep_delay",
+      "min": 0,
+      "max": 1000000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_api_bk_commit_interval",
+      "min": 1,
+      "max": 1073741824,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_api_trx_level",
+      "min": 0,
+      "max": 3,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_autoextend_increment",
+      "min": 1,
+      "max": 1000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_buffer_pool_chunk_size",
+      "min": 1048576,
+      "max": 4294967295,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_buffer_pool_dump_at_shutdown",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_buffer_pool_dump_now",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_buffer_pool_dump_pct",
+      "min": 1,
+      "max": 100,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_buffer_pool_filename",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "innodb_buffer_pool_instances",
+      "min": 1,
+      "max": 64,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_buffer_pool_load_abort",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_buffer_pool_load_at_startup",
+
+      "restart_required": true,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_buffer_pool_load_now",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_buffer_pool_size",
+      "min": 5242880,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_change_buffer_max_size",
+      "min": 0,
+      "max": 50,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_change_buffering",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_checksum_algorithm",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_cmp_per_index_enabled",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_commit_concurrency",
+      "min": 0,
+      "max": 1000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_compression_failure_threshold_pct",
+      "min": 0,
+      "max": 100,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_compression_level",
+      "min": 0,
+      "max": 9,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_concurrency_tickets",
+      "min": 1,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_deadlock_detect",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_default_row_format",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_disable_sort_file_cache",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_fast_shutdown",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_file_format",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_file_format_max",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_file_per_table",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_fill_factor",
+      "min": 10,
+      "max": 100,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_flush_log_at_trx_commit",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_flush_method",
+
+      "restart_required": true,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_flush_neighbors",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_flush_sync",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_flushing_avg_loops",
+      "min": 1,
+      "max": 1000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_ft_cache_size",
+      "min": 1600000,
+      "max": 80000000,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_ft_enable_diag_print",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_ft_enable_stopword",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_ft_max_token_size",
+      "min": 10,
+      "max": 84,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_ft_min_token_size",
+      "min": 0,
+      "max": 16,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_ft_num_word_optimize",
+      "min": 1000,
+      "max": 10000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_ft_result_cache_limit",
+      "min": 1000000,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_ft_server_stopword_table",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "innodb_ft_sort_pll_degree",
+      "min": 1,
+      "max": 32,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_ft_total_cache_size",
+      "min": 32000000,
+      "max": 1600000000,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_ft_user_stopword_table",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "innodb_io_capacity",
+      "min": 100,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_io_capacity_max",
+      "min": 100,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_large_prefix",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_lock_wait_timeout",
+      "min": 1,
+      "max": 1073741824,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_log_buffer_size",
+      "min": 1048576,
+      "max": 4294967295,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_log_checksums",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_log_compressed_pages",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_log_file_size",
+      "min": 4194304,
+      "max": 274877906944,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_log_files_in_group",
+      "min": 2,
+      "max": 100,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_log_write_ahead_size",
+      "min": 512,
+      "max": 16384,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_lru_scan_depth",
+      "min": 100,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_max_dirty_pages_pct",
+      "min": 0,
+      "max": 99.99,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_max_dirty_pages_pct_lwm",
+      "min": 0,
+      "max": 99.99,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_max_purge_lag",
+      "min": 0,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_max_purge_lag_delay",
+      "min": 0,
+      "max": 10000000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_max_undo_log_size",
+      "min": 10485760,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_monitor_disable",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "innodb_monitor_enable",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "innodb_monitor_reset",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_monitor_reset_all",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_old_blocks_pct",
+      "min": 5,
+      "max": 95,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_old_blocks_time",
+      "min": 0,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_online_alter_log_max_size",
+      "min": 65536,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_optimize_fulltext_only",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_page_cleaners",
+      "min": 1,
+      "max": 64,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_page_size",
+
+      "restart_required": true,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_print_all_deadlocks",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_purge_batch_size",
+      "min": 1,
+      "max": 5000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_purge_rseg_truncate_frequency",
+      "min": 1,
+      "max": 128,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_purge_threads",
+      "min": 1,
+      "max": 32,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_random_read_ahead",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_read_ahead_threshold",
+      "min": 0,
+      "max": 64,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_read_io_threads",
+      "min": 1,
+      "max": 64,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_replication_delay",
+      "min": 0,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_rollback_segments",
+      "min": 1,
+      "max": 128,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_sort_buffer_size",
+      "min": 65536,
+      "max": 67108864,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_spin_wait_delay",
+      "min": 0,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_stats_auto_recalc",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_stats_method",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_stats_on_metadata",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_stats_persistent",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_stats_persistent_sample_pages",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_stats_sample_pages",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_stats_transient_sample_pages",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_status_output",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_status_output_locks",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_strict_mode",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_support_xa",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_sync_spin_loops",
+      "min": 0,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_table_locks",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "innodb_temp_data_file_path",
+
+      "restart_required": true,
+      "type": "string"
+     },
+     {
+      "name": "innodb_thread_concurrency",
+      "min": 0,
+      "max": 1000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_thread_sleep_delay",
+      "min": 0,
+      "max": 1000000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_tmpdir",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "innodb_undo_logs",
+      "min": 1,
+      "max": 128,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "innodb_write_io_threads",
+      "min": 1,
+      "max": 64,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "interactive_timeout",
+      "min": 1,
+      "max": 31536000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "internal_tmp_disk_storage_engine",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "join_buffer_size",
+      "min": 128,
+      "max": "18446744073709551488",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "keep_files_on_create",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "key_buffer_size",
+      "min": 0,
+      "max": "9223372036854771712",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "key_cache_age_threshold",
+      "min": 100,
+      "max": "18446744073709551516",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "key_cache_block_size",
+      "min": 512,
+      "max": 16384,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "key_cache_division_limit",
+      "min": 1,
+      "max": 100,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "lc_messages",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "local_infile",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "lock_wait_timeout",
+      "min": 1,
+      "max": 31536000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "log_bin_trust_function_creators",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "log_builtin_as_identified_by_password",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "log_error_verbosity",
+      "min": 1,
+      "max": 3,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "log_output",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "log_queries_not_using_indexes",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "log_slave_updates",
+
+      "restart_required": true,
+      "type": "boolean"
+     },
+     {
+      "name": "log_slow_admin_statements",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "log_slow_slave_statements",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "log_syslog",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "log_syslog_facility",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "log_syslog_include_pid",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "log_syslog_tag",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "log_timestamps",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "log_warnings",
+      "min": 0,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "long_query_time",
+      "min": 0,
+      "max": 31536000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "low_priority_updates",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "lower_case_table_names",
+      "min": 0,
+      "max": 2,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "master_verify_checksum",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "max_allowed_packet",
+      "min": 1024,
+      "max": 1073741824,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_binlog_cache_size",
+      "min": 4096,
+      "max": "18446744073709547520",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_binlog_size",
+      "min": 4096,
+      "max": 1073741824,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_binlog_stmt_cache_size",
+      "min": 4096,
+      "max": "18446744073709547520",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_connect_errors",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_connections",
+      "min": 1,
+      "max": 100000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_delayed_threads",
+      "min": 0,
+      "max": 16384,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_digest_length",
+      "min": 0,
+      "max": 1048576,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "max_error_count",
+      "min": 0,
+      "max": 65535,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_execution_time",
+      "min": 0,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_heap_table_size",
+      "min": 16384,
+      "max": "18446744073709550592",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_join_size",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_length_for_sort_data",
+      "min": 4,
+      "max": 8388608,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_points_in_geometry",
+      "min": 3,
+      "max": 1048576,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_prepared_stmt_count",
+      "min": 0,
+      "max": 1048576,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_relay_log_size",
+      "min": 0,
+      "max": 1073741824,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_seeks_for_key",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_sort_length",
+      "min": 4,
+      "max": 8388608,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_sp_recursion_depth",
+      "min": 0,
+      "max": 255,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_user_connections",
+      "min": 0,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "max_write_lock_count",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "min_examined_row_limit",
+      "min": 0,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "multi_range_count",
+      "min": 1,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "myisam_max_sort_file_size",
+      "min": 0,
+      "max": "9223372036853727232",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "myisam_repair_threads",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "myisam_sort_buffer_size",
+      "min": 4096,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "myisam_stats_method",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "myisam_use_mmap",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "mysql_native_password_proxy_users",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "net_buffer_length",
+      "min": 1024,
+      "max": 1048576,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "net_read_timeout",
+      "min": 1,
+      "max": 31536000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "net_retry_count",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "net_write_timeout",
+      "min": 1,
+      "max": 31536000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "new",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "offline_mode",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "optimizer_prune_level",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "optimizer_search_depth",
+      "min": 0,
+      "max": 62,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "optimizer_switch",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "parser_max_mem_size",
+      "min": 10000000,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema",
+
+      "restart_required": true,
+      "type": "boolean"
+     },
+     {
+      "name": "performance_schema_max_cond_classes",
+      "min": 0,
+      "max": 256,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_max_digest_length",
+      "min": 0,
+      "max": 1048576,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_max_file_classes",
+      "min": 0,
+      "max": 256,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_max_file_handles",
+      "min": 0,
+      "max": 1048576,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_max_memory_classes",
+      "min": -1,
+      "max": 1024,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_max_mutex_classes",
+      "min": 0,
+      "max": 256,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_max_rwlock_classes",
+      "min": 0,
+      "max": 256,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_max_socket_classes",
+      "min": 0,
+      "max": 256,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_max_sql_text_length",
+      "min": 0,
+      "max": 1048576,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_max_stage_classes",
+      "min": 0,
+      "max": 256,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_max_statement_stack",
+      "min": 1,
+      "max": 256,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_max_thread_classes",
+      "min": 0,
+      "max": 256,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "performance_schema_setup_actors_size",
+      "min": -1,
+      "max": 1024,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "preload_buffer_size",
+      "min": 1024,
+      "max": 1073741824,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "profiling_history_size",
+      "min": 0,
+      "max": 100,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "query_alloc_block_size",
+      "min": 1024,
+      "max": 4294966272,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "query_cache_limit",
+      "min": 0,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "query_cache_min_res_unit",
+      "min": 512,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "query_cache_size",
+      "min": 0,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "query_cache_type",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "query_cache_wlock_invalidate",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "range_alloc_block_size",
+      "min": 4096,
+      "max": "18446744073709550592",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "range_optimizer_max_mem_size",
+      "min": 0,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "read_buffer_size",
+      "min": 8192,
+      "max": 2147479552,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "read_rnd_buffer_size",
+      "min": 1,
+      "max": 2147483647,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "relay_log_info_repository",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "relay_log_purge",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "relay_log_recovery",
+
+      "restart_required": true,
+      "type": "boolean"
+     },
+     {
+      "name": "rpl_semi_sync_master_enabled",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "rpl_semi_sync_master_timeout",
+      "min": 0,
+      "max": 10000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "rpl_semi_sync_master_wait_for_slave_count",
+      "min": 1,
+      "max": 65535,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "rpl_semi_sync_master_wait_no_slave",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "rpl_semi_sync_master_wait_point",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "rpl_semi_sync_slave_enabled",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "rpl_stop_slave_timeout",
+      "min": 2,
+      "max": 31536000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "server_audit_events",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "server_audit_excl_users",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "server_audit_file_rotate_size",
+      "min": 1,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "server_audit_file_rotations",
+      "min": 0,
+      "max": 40,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "server_audit_logging",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "server_audit_query_log_limit",
+      "min": 0,
+      "max": 2147483647,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "session_track_gtids",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "session_track_schema",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "session_track_state_change",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "session_track_system_variables",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "show_compatibility_56",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "show_old_temporals",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "skip-name-resolve",
+
+      "restart_required": true,
+      "type": "boolean"
+     },
+     {
+      "name": "slave_allow_batching",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "slave_checkpoint_group",
+      "min": 32,
+      "max": 524280,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "slave_checkpoint_period",
+      "min": 1,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "slave_compressed_protocol",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "slave_exec_mode",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "slave_max_allowed_packet",
+      "min": 1024,
+      "max": 1073741824,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "slave_net_timeout",
+      "min": 1,
+      "max": 31536000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "slave_parallel_type",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "slave_parallel_workers",
+      "min": 0,
+      "max": 1024,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "slave_rows_search_algorithms",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "slave_transaction_retries",
+      "min": 0,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "slow_launch_time",
+      "min": 0,
+      "max": 31536000,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "slow_query_log",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "sort_buffer_size",
+      "min": 32768,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "sql_mode",
+
+      "restart_required": false,
+      "type": "string"
+     },
+     {
+      "name": "stored_program_cache",
+      "min": 16,
+      "max": 524288,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "sync_binlog",
+      "min": 0,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "sync_frm",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "sync_master_info",
+      "min": 0,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "sync_relay_log",
+      "min": 0,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "sync_relay_log_info",
+      "min": 0,
+      "max": 4294967295,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "table_open_cache",
+      "min": 1,
+      "max": 524288,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "table_open_cache_instances",
+      "min": 1,
+      "max": 64,
+      "restart_required": true,
+      "type": "integer"
+     },
+     {
+      "name": "thread_cache_size",
+      "min": 0,
+      "max": 16384,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "time_zone",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "tls_version",
+
+      "restart_required": true,
+      "type": "string"
+     },
+     {
+      "name": "tmp_table_size",
+      "min": 1024,
+      "max": "18446744073709551615",
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "transaction_prealloc_size",
+      "min": 1024,
+      "max": 131072,
+      "restart_required": false,
+      "type": "integer"
+     },
+     {
+      "name": "tx_isolation",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "updatable_views_with_limit",
+
+      "restart_required": false,
+      "type": "boolean"
+     },
+     {
+      "name": "wait_timeout",
+      "min": 1,
+      "max": 31536000,
+      "restart_required": false,
+      "type": "integer"
+     }
+    ]
+}
