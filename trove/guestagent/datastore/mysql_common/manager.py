@@ -326,10 +326,6 @@ class MySqlManager(manager.Manager):
         """Upgrade the database."""
         LOG.info('Starting to upgrade database, upgrade_info: %s',
                  upgrade_info)
-        user = self.adm.enable_root()
-        LOG.info(f"User:{user}")
-        upgrade_info.update({"root_pass":user.get("_password")})
-
         self.app.upgrade(upgrade_info)
 
     def rebuild(self, context, ds_version, config_contents=None,

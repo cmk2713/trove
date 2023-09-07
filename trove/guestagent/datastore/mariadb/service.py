@@ -89,13 +89,13 @@ class MariaDBApp(mysql_service.BaseMySqlApp):
         if new_version == CONF.datastore_version:
              return
         
-        #Get root password for upgrade
+        #Get admin password for upgrade
         try:
-            LOG.info('Checking Root Authentication is enabled')
-            root_pass = upgrade_info.get('root_pass')
-            LOG.info(f'Root_Pass = {root_pass}')
+            LOG.info('Checking Admin Authentication is enabled')
+            os_admin_pass = self.get_auth_password(file="os_admin.cnf")
+            LOG.info(f'Admin_Pass = {os_admin_pass}')
         except:
-            raise Exception("root is unable")
+            raise Exception("os_admin is invalid")
         
         # #Check whether upgrading is possible
         from distutils.version import LooseVersion
@@ -115,8 +115,8 @@ class MariaDBApp(mysql_service.BaseMySqlApp):
                  new_version)
         #Waiting until db is running
         self.start_db(update_db=True, ds_version=new_version)
-        LOG.info(f'Excuting "mysql_upgrade -uroot -p{root_pass}" because new version is {new_version}')
-        docker_util.run_command(self.docker_client, f'mysql_upgrade -uroot -p{root_pass}')
+        LOG.info(f'Excuting "mysql_upgrade -uos_admin -p{os_admin_pass}" because new version is {new_version}')
+        docker_util.run_command(self.docker_client, f'mysql_upgrade -uos_admin -p{os_admin_pass}')
 
         LOG.info('Stopping db container for upgrade')
         self.stop_db()

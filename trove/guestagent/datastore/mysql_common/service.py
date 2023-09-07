@@ -511,11 +511,34 @@ class BaseMySqlApp(service.BaseDbApp):
             )
             t = text(str(uu))
             client.execute(t)
+        
+        # create docker access os_admin
+        try:
+            cu = sql_query.CreateUser(ADMIN_USER_NAME, host="172.17.0.1",
+                                      clear=password)
+            t = text(str(cu))
+            client.execute(t, **cu.keyArgs)
+        except (exc.OperationalError, exc.InternalError) as err:
+            # Ignore, user is already created, just reset the password
+            # (user will already exist in a restore from backup)
+            LOG.debug(err)
+            uu = sql_query.SetPassword(
+                ADMIN_USER_NAME, host="172.17.0.1", new_password=password,
+                ds=CONF.datastore_manager, ds_version=CONF.datastore_version
+            )
+            t = text(str(uu))
+            client.execute(t)
 
         g = sql_query.Grant(permissions='ALL', user=ADMIN_USER_NAME,
                             host=host, grant_option=True)
         t = text(str(g))
         client.execute(t)
+
+        g = sql_query.Grant(permissions='ALL', user=ADMIN_USER_NAME,
+                            host="172.17.0.1", grant_option=True)
+        t = text(str(g))
+        client.execute(t)
+
         LOG.info("Trove admin user '%s' created.", ADMIN_USER_NAME)
 
     def secure(self):
@@ -882,7 +905,6 @@ class BaseMySqlRootAccess(object):
 
             t = text(str(g))
             client.execute(t)
-            self.mysql_app.save_password('root', user._password)
             return user.serialize()
 
     def disable_root(self):

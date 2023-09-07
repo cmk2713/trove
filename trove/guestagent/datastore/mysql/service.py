@@ -101,13 +101,13 @@ class MySqlApp(service.BaseMySqlApp):
         if new_version == CONF.datastore_version:
              return
         
-        #Get root password for upgrade
+        #Get admin password for upgrade
         try:
-            LOG.info('Checking Root Authentication is enabled')
-            root_pass = upgrade_info.get('root_pass')
-            LOG.info(f'Root_Pass = {root_pass}')
+            LOG.info('Checking Admin Authentication is enabled')
+            os_admin_pass = self.get_auth_password(file="os_admin.cnf")
+            LOG.info(f'Admin_Pass = {os_admin_pass}')
         except:
-            raise Exception("root is unable")
+            raise Exception("os_admin is invalid")
         
         # #Check whether upgrading is possible
         from distutils.version import LooseVersion
@@ -116,8 +116,8 @@ class MySqlApp(service.BaseMySqlApp):
         
         if new_ver[0]==8 and new_ver[1]==0 and new_ver[2]>=11:
             LOG.info('Checking it is possible to upgrade Mysql')
-            LOG.info('''sudo mysqlsh -h 172.17.0.1 -uroot -p%s -e "util.checkForServerUpgrade('root@172.17.0.1:3306',{'password':'','targetVersion':'%s', 'outputFormat':'JSON'});"''',root_pass, root_pass, new_version)
-            upgradeCheckCmd='''sudo mysqlsh -h 172.17.0.1 -uroot -p'''+root_pass+ """ -e "util.checkForServerUpgrade('root@172.17.0.1:3306',{'password':'"""+root_pass+"""','targetVersion':'"""+new_version+"""', 'outputFormat':'JSON'});" """
+            LOG.info('''sudo mysqlsh -h 172.17.0.1 -uos_admin -p%s -e "util.checkForServerUpgrade('os_admin@172.17.0.1:3306',{'password':'','targetVersion':'%s', 'outputFormat':'JSON'});"''',os_admin_pass, os_admin_pass, new_version)
+            upgradeCheckCmd='''sudo mysqlsh -h 172.17.0.1 -uos_admin -p'''+os_admin_pass+ """ -e "util.checkForServerUpgrade('os_admin@172.17.0.1:3306',{'password':'"""+os_admin_pass+"""','targetVersion':'"""+new_version+"""', 'outputFormat':'JSON'});" """
             upgradecheck = subprocess.Popen(upgradeCheckCmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             LOG.info(f"subprocess running cmd:{upgradecheck.args}")
             (stdout, stderr) = upgradecheck.communicate()
