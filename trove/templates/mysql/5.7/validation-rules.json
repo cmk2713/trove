@@ -1,16 +1,11 @@
-{"configuration-parameters":[
-  {
-   "name": "activate_all_roles_on_login",
-   "restart_required": false,
-   "type": "boolean"
-  },
+{ "configuration-parameters":[
   {
    "name": "autocommit",
    "restart_required": false,
    "type": "boolean"
   },
   {
-   "name": "automatic_sp_privileges",
+   "name": "avoid_temporal_upgrade",
    "restart_required": false,
    "type": "boolean"
   },
@@ -56,19 +51,9 @@
    "type": "string"
   },
   {
-   "name": "binlog_row_metadata",
-   "restart_required": false,
-   "type": "string"
-  },
-  {
    "name": "binlog_rows_query_log_events",
    "restart_required": false,
    "type": "boolean"
-  },
-  {
-   "name": "binlog_row_value_options",
-   "restart_required": false,
-   "type": "string"
   },
   {
    "name": "binlog_stmt_cache_size",
@@ -76,18 +61,6 @@
    "max": 18446744073709547520,
    "restart_required": false,
    "type": "integer"
-  },
-  {
-   "name": "binlog_transaction_dependency_history_size",
-   "min": 1,
-   "max": 1000000,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
-   "name": "binlog_transaction_dependency_tracking",
-   "restart_required": false,
-   "type": "string"
   },
   {
    "name": "block_encryption_mode",
@@ -134,13 +107,6 @@
    "type": "integer"
   },
   {
-   "name": "cte_max_recursion_depth",
-   "min": 0,
-   "max": 4294967295,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
    "name": "default_password_lifetime",
    "min": 0,
    "max": 65535,
@@ -162,13 +128,6 @@
    "type": "integer"
   },
   {
-   "name": "delayed_insert_timeout",
-   "min": 1,
-   "max": 31536000,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
    "name": "delayed_queue_size",
    "min": 1,
    "max": 18446744073709551615,
@@ -184,18 +143,6 @@
    "name": "div_precision_increment",
    "min": 0,
    "max": 30,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
-   "name": "end_markers_in_json",
-   "restart_required": false,
-   "type": "boolean"
-  },
-  {
-   "name": "eq_range_index_dive_limit",
-   "min": 0,
-   "max": 4294967295,
    "restart_required": false,
    "type": "integer"
   },
@@ -243,13 +190,6 @@
    "type": "integer"
   },
   {
-   "name": "information_schema_stats_expiry",
-   "min": 0,
-   "max": 31536000,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
    "name": "init_connect",
    "restart_required": false,
    "type": "string"
@@ -290,12 +230,6 @@
    "min": 1,
    "max": 1000,
    "restart_required": false,
-   "type": "integer"
-  },
-  {
-   "name": "innodb_autoinc_lock_mode",
-   "min": 36527,
-   "restart_required": true,
    "type": "integer"
   },
   {
@@ -392,11 +326,6 @@
    "type": "boolean"
   },
   {
-   "name": "innodb_dedicated_server",
-   "restart_required": true,
-   "type": "boolean"
-  },
-  {
    "name": "innodb_default_row_format",
    "restart_required": false,
    "type": "string"
@@ -408,10 +337,14 @@
   },
   {
    "name": "innodb_fast_shutdown",
-   "min": 0,
-   "max": 2,
+   "min": 36527,
    "restart_required": false,
    "type": "integer"
+  },
+  {
+   "name": "innodb_file_format",
+   "restart_required": false,
+   "type": "string"
   },
   {
    "name": "innodb_file_per_table",
@@ -531,6 +464,11 @@
    "type": "integer"
   },
   {
+   "name": "innodb_large_prefix",
+   "restart_required": false,
+   "type": "boolean"
+  },
+  {
    "name": "innodb_lock_wait_timeout",
    "min": 1,
    "max": 1073741824,
@@ -541,7 +479,7 @@
    "name": "innodb_log_buffer_size",
    "min": 1048576,
    "max": 4294967295,
-   "restart_required": false,
+   "restart_required": true,
    "type": "integer"
   },
   {
@@ -554,27 +492,6 @@
    "min": 4194304,
    "max": 274877906944,
    "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "innodb_log_spin_cpu_abs_lwm",
-   "min": 0,
-   "max": 4294967295,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
-   "name": "innodb_log_spin_cpu_pct_hwm",
-   "min": 0,
-   "max": 100,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
-   "name": "innodb_log_wait_for_flush_spin_hwm",
-   "min": 0,
-   "max": 184467440737095516165,
-   "restart_required": false,
    "type": "integer"
   },
   {
@@ -678,19 +595,7 @@
    "type": "integer"
   },
   {
-   "name": "innodb_parallel_read_threads",
-   "min": 1,
-   "max": 256,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
    "name": "innodb_print_all_deadlocks",
-   "restart_required": false,
-   "type": "boolean"
-  },
-  {
-   "name": "innodb_print_ddl_logs",
    "restart_required": false,
    "type": "boolean"
   },
@@ -735,23 +640,11 @@
    "type": "integer"
   },
   {
-   "name": "innodb_redo_log_capacity",
-   "min": 8388608,
-   "max": 137438953472,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
    "name": "innodb_replication_delay",
    "min": 0,
    "max": 4294967295,
    "restart_required": false,
    "type": "integer"
-  },
-  {
-   "name": "innodb_rollback_on_timeout",
-   "restart_required": true,
-   "type": "boolean"
   },
   {
    "name": "innodb_rollback_segments",
@@ -770,18 +663,13 @@
   {
    "name": "innodb_spin_wait_delay",
    "min": 0,
-   "max": 1000,
+   "max": 18446744073709551615,
    "restart_required": false,
    "type": "integer"
   },
   {
    "name": "innodb_stats_auto_recalc",
    "restart_required": false,
-   "type": "boolean"
-  },
-  {
-   "name": "innodb_stats_include_delete_marked",
-   "restart_required": true,
    "type": "boolean"
   },
   {
@@ -808,7 +696,7 @@
   },
   {
    "name": "innodb_stats_transient_sample_pages",
-   "min": 0,
+   "min": 1,
    "max": 18446744073709551615,
    "restart_required": false,
    "type": "integer"
@@ -825,6 +713,11 @@
   },
   {
    "name": "innodb_strict_mode",
+   "restart_required": false,
+   "type": "boolean"
+  },
+  {
+   "name": "innodb_support_xa",
    "restart_required": false,
    "type": "boolean"
   },
@@ -855,9 +748,11 @@
    "type": "integer"
   },
   {
-   "name": "innodb_undo_log_truncate",
+   "name": "innodb_undo_logs",
+   "min": 1,
+   "max": 128,
    "restart_required": false,
-   "type": "boolean"
+   "type": "integer"
   },
   {
    "name": "innodb_write_io_threads",
@@ -874,7 +769,7 @@
    "type": "integer"
   },
   {
-   "name": "internal_tmp_mem_storage_engine",
+   "name": "internal_tmp_disk_storage_engine",
    "restart_required": false,
    "type": "string"
   },
@@ -936,6 +831,11 @@
    "type": "boolean"
   },
   {
+   "name": "log_builtin_as_identified_by_password",
+   "restart_required": false,
+   "type": "boolean"
+  },
+  {
    "name": "log_error_verbosity",
    "min": 1,
    "max": 3,
@@ -958,14 +858,21 @@
    "type": "boolean"
   },
   {
-   "name": "log_slow_extra",
+   "name": "log_slow_slave_statements",
    "restart_required": false,
-   "type": "string"
+   "type": "boolean"
   },
   {
    "name": "log_timestamps",
    "restart_required": false,
    "type": "string"
+  },
+  {
+   "name": "log_warnings",
+   "min": 0,
+   "max": 18446744073709551615,
+   "restart_required": false,
+   "type": "integer"
   },
   {
    "name": "long_query_time",
@@ -975,7 +882,7 @@
   {
    "name": "lower_case_table_names",
    "min": 0,
-   "max": 1,
+   "max": 2,
    "restart_required": true,
    "type": "integer"
   },
@@ -983,11 +890,6 @@
    "name": "low_priority_updates",
    "restart_required": false,
    "type": "boolean"
-  },
-  {
-   "name": "mandatory_roles",
-   "restart_required": false,
-   "type": "string"
   },
   {
    "name": "master_verify_checksum",
@@ -1012,13 +914,6 @@
    "name": "max_binlog_stmt_cache_size",
    "min": 4096,
    "max": 18446744073709547520,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
-   "name": "max_connect_errors",
-   "min": 1,
-   "max": 18446744073709551615,
    "restart_required": false,
    "type": "integer"
   },
@@ -1192,13 +1087,6 @@
    "type": "integer"
   },
   {
-   "name": "ngram_token_size",
-   "min": 1,
-   "max": 10,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
    "name": "optimizer_prune_level",
    "restart_required": false,
    "type": "boolean"
@@ -1216,105 +1104,14 @@
    "type": "string"
   },
   {
-   "name": "password_reuse_interval",
-   "min": 0,
-   "max": 4294967295,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
    "name": "performance_schema",
    "restart_required": true,
    "type": "boolean"
   },
   {
-   "name": "performance_schema_accounts_size",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_digests_size",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_events_stages_history_long_size",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_events_stages_history_size",
-   "min": -1,
-   "max": 1024,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_events_statements_history_long_size",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_events_statements_history_size",
-   "min": -1,
-   "max": 1024,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_events_transactions_history_long_size",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_events_transactions_history_size",
-   "min": -1,
-   "max": 1024,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_events_waits_history_long_size",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_events_waits_history_size",
-   "min": -1,
-   "max": 1024,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_hosts_size",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
    "name": "performance_schema_max_cond_classes",
    "min": 0,
-   "max": 1024,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_max_cond_instances",
-   "min": -1,
-   "max": 1048576,
+   "max": 256,
    "restart_required": true,
    "type": "integer"
   },
@@ -1323,13 +1120,6 @@
    "min": 0,
    "max": 1048576,
    "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_max_digest_sample_age",
-   "min": 0,
-   "max": 1048576,
-   "restart_required": false,
    "type": "integer"
   },
   {
@@ -1347,20 +1137,6 @@
    "type": "integer"
   },
   {
-   "name": "performance_schema_max_file_instances",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_max_index_stat",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
    "name": "performance_schema_max_memory_classes",
    "min": -1,
    "max": 1024,
@@ -1368,37 +1144,9 @@
    "type": "integer"
   },
   {
-   "name": "performance_schema_max_metadata_locks",
-   "min": -1,
-   "max": 104857600,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
    "name": "performance_schema_max_mutex_classes",
    "min": 0,
-   "max": 1024,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_max_mutex_instances",
-   "min": -1,
-   "max": 104857600,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_max_prepared_statements_instances",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_max_program_instances",
-   "min": -1,
-   "max": 1048576,
+   "max": 256,
    "restart_required": true,
    "type": "integer"
   },
@@ -1410,23 +1158,9 @@
    "type": "integer"
   },
   {
-   "name": "performance_schema_max_rwlock_instances",
-   "min": -1,
-   "max": 104857600,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
    "name": "performance_schema_max_socket_classes",
    "min": 0,
-   "max": 1024,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_max_socket_instances",
-   "min": -1,
-   "max": 1048576,
+   "max": 256,
    "restart_required": true,
    "type": "integer"
   },
@@ -1440,7 +1174,7 @@
   {
    "name": "performance_schema_max_stage_classes",
    "min": 0,
-   "max": 1024,
+   "max": 256,
    "restart_required": true,
    "type": "integer"
   },
@@ -1452,44 +1186,9 @@
    "type": "integer"
   },
   {
-   "name": "performance_schema_max_table_handles",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_max_table_instances",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_max_table_lock_stat",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
    "name": "performance_schema_max_thread_classes",
    "min": 0,
-   "max": 1024,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_max_thread_instances",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_session_connect_attrs_size",
-   "min": -1,
-   "max": 1048576,
+   "max": 256,
    "restart_required": true,
    "type": "integer"
   },
@@ -1497,20 +1196,6 @@
    "name": "performance_schema_setup_actors_size",
    "min": -1,
    "max": 1024,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_setup_objects_size",
-   "min": -1,
-   "max": 1048576,
-   "restart_required": true,
-   "type": "integer"
-  },
-  {
-   "name": "performance_schema_users_size",
-   "min": -1,
-   "max": 1048576,
    "restart_required": true,
    "type": "integer"
   },
@@ -1534,6 +1219,38 @@
    "max": 4294966272,
    "restart_required": false,
    "type": "integer"
+  },
+  {
+   "name": "query_cache_limit",
+   "min": 0,
+   "max": 18446744073709551615,
+   "restart_required": false,
+   "type": "integer"
+  },
+  {
+   "name": "query_cache_min_res_unit",
+   "min": 512,
+   "max": 18446744073709551615,
+   "restart_required": false,
+   "type": "integer"
+  },
+  {
+   "name": "query_cache_size",
+   "min": 0,
+   "max": 18446744073709551615,
+   "restart_required": false,
+   "type": "integer"
+  },
+  {
+   "name": "query_cache_type",
+   "min": 36527,
+   "restart_required": true,
+   "type": "integer"
+  },
+  {
+   "name": "query_cache_wlock_invalidate",
+   "restart_required": false,
+   "type": "boolean"
   },
   {
    "name": "range_alloc_block_size",
@@ -1609,23 +1326,13 @@
    "type": "string"
   },
   {
-   "name": "session_track_transaction_info",
-   "restart_required": false,
-   "type": "string"
-  },
-  {
-   "name": "sha256_password_proxy_users",
+   "name": "show_compatibility_56",
    "restart_required": false,
    "type": "boolean"
   },
   {
    "name": "show_old_temporals",
    "restart_required": false,
-   "type": "boolean"
-  },
-  {
-   "name": "skip_name_resolve",
-   "restart_required": true,
    "type": "boolean"
   },
   {
@@ -1653,11 +1360,6 @@
    "type": "boolean"
   },
   {
-   "name": "slave_exec_mode",
-   "restart_required": false,
-   "type": "string"
-  },
-  {
    "name": "slave_net_timeout",
    "min": 1,
    "max": 31536000,
@@ -1677,18 +1379,6 @@
    "type": "integer"
   },
   {
-   "name": "slave_pending_jobs_size_max",
-   "min": 1024,
-   "max": 18446744073709547520,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
-   "name": "slave_preserve_commit_order",
-   "restart_required": false,
-   "type": "boolean"
-  },
-  {
    "name": "slave_rows_search_algorithms",
    "restart_required": false,
    "type": "string"
@@ -1699,11 +1389,6 @@
    "max": 18446744073709551615,
    "restart_required": false,
    "type": "integer"
-  },
-  {
-   "name": "slave_type_conversions",
-   "restart_required": true,
-   "type": "string"
   },
   {
    "name": "slow_launch_time",
@@ -1737,18 +1422,16 @@
    "type": "integer"
   },
   {
-   "name": "stored_program_definition_cache",
-   "min": 256,
-   "max": 524288,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
    "name": "sync_binlog",
    "min": 0,
    "max": 4294967295,
    "restart_required": false,
    "type": "integer"
+  },
+  {
+   "name": "sync_frm",
+   "restart_required": false,
+   "type": "boolean"
   },
   {
    "name": "sync_master_info",
@@ -1791,13 +1474,6 @@
    "type": "integer"
   },
   {
-   "name": "temptable_max_ram",
-   "min": 2097152,
-   "max": 18446744073709551615,
-   "restart_required": false,
-   "type": "integer"
-  },
-  {
    "name": "thread_cache_size",
    "min": 0,
    "max": 16384,
@@ -1822,16 +1498,16 @@
    "type": "integer"
   },
   {
-   "name": "transaction_isolation",
-   "restart_required": false,
-   "type": "string"
-  },
-  {
    "name": "transaction_prealloc_size",
    "min": 1024,
    "max": 131072,
    "restart_required": false,
    "type": "integer"
+  },
+  {
+   "name": "tx_isolation",
+   "restart_required": false,
+   "type": "string"
   },
   {
    "name": "updatable_views_with_limit",
@@ -1844,11 +1520,6 @@
    "max": 31536000,
    "restart_required": false,
    "type": "integer"
-  },
-  {
-   "name": "windowing_use_high_precision",
-   "restart_required": false,
-   "type": "boolean"
   }
  ]
 }

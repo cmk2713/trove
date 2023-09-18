@@ -3,32 +3,32 @@ port = 3306
 socket = /var/run/mysqld/mysqld.sock
 
 [mysqld_safe]
+pid-file = /var/run/mysqld/mysqld.pid
+socket = /var/run/mysqld/mysqld.sock
 nice = 0
 
 [mysqld]
 port = 3306
 basedir = /usr
-binlog_format=MIXED
 datadir = /var/lib/mysql/data
+secure-file-priv = NULL
 tmpdir = /var/tmp
-pid_file = /var/run/mysqld/mysqld.pid
+pid-file = /var/run/mysqld/mysqld.pid
 socket = /var/run/mysqld/mysqld.sock
+default_authentication_plugin = mysql_native_password
 skip-external-locking = 1
 key_buffer_size = {{ (50 * flavor['ram']/512)|int }}M
 max_allowed_packet = {{ (1024 * flavor['ram']/512)|int }}K
 thread_stack = 192K
 thread_cache_size = {{ (4 * flavor['ram']/512)|int }}
 myisam-recover-options = BACKUP,FORCE
-query_cache_type = 1
-query_cache_limit = 1M
-query_cache_size = {{ (8 * flavor['ram']/512)|int }}M
+innodb_data_home_dir = /var/lib/mysql/data
 innodb_data_file_path = ibdata1:10M:autoextend
 innodb_buffer_pool_size = {{ (150 * flavor['ram']/512)|int }}M
 innodb_file_per_table = 1
 innodb_log_files_in_group = 2
 innodb_log_file_size=50M
 innodb_log_buffer_size=25M
-innodb_flush_method=O_DIRECT
 connect_timeout = 15
 wait_timeout = 120
 join_buffer_size = 1M
@@ -43,8 +43,20 @@ open_files_limit = {{ (512 * flavor['ram']/512)|int }}
 max_user_connections = {{ (100 * flavor['ram']/512)|int }}
 max_connections = {{ (100 * flavor['ram']/512)|int }}
 default_storage_engine = innodb
-local-infile = 1
+local_infile = 0
 server_id = {{server_id}}
+performance_schema = ON
+autocommit = ON
+auto_increment_increment = 1
+general_log_file = /var/lib/mysql/data/general.log
+relay_log = /var/lib/mysql/data/relay-bin.index
+relay_log_recovery = 1
+innodb_flush_method = O_DIRECT
+innodb_purge_threads = 1
+max_digest_length = 1024
+sql_mode = NO_ENGINE_SUBSTITUTION
+table_open_cache_instances = 16
+explicit_defaults_for_timestamp = 1
 
 [mysqldump]
 quick = 1

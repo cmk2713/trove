@@ -29,6 +29,23 @@
       "type": "integer"
     },
     {
+      "name": "binlog_expire_logs_seconds",
+      "restart_required": false,
+      "max": 4294967295,
+      "min": 0,
+      "type": "integer"
+    },
+    {
+      "name": "block_encryption_mode",
+      "restart_required": false,
+      "type": "string"
+    },
+    {
+      "name": "character_set_client",
+      "restart_required": false,
+      "type": "string"
+    },
+    {
       "name": "character_set_client",
       "restart_required": false,
       "type": "string"
@@ -81,10 +98,32 @@
       "type": "integer"
     },
     {
+      "name":"default-authentication-plugin",
+      "restart_required": true,
+      "type": "string"
+    },
+    {
+      "name":"default-time-zone",
+      "restart_required": true,
+      "type": "string"
+    },
+    {
+      "name": "event_scheduler",
+      "restart_required": false,
+      "type": "boolean"
+    },
+    {
       "name": "expire_logs_days",
       "restart_required": false,
       "max": 99,
       "min": 0,
+      "type": "integer"
+    },
+    {
+      "name": "group_concat_max_len",
+      "restart_required": false,
+      "max": 18446744073709551615,
+      "min": 4,
       "type": "integer"
     },
     {
@@ -262,14 +301,23 @@
     },
     {
       "name": "innodb_ft_max_token_size",
-      "restart_required": false,
+      "restart_required": true,
       "max": 84,
       "min": 10,
       "type": "integer"
     },
     {
+      "name": "innodb_ft_min_token_size",
+      "restart_required": true,
+      "max": 3,
+      "min": 0,
+      "type": "integer"
+    },
+    {
       "name": "innodb_ft_num_word_optimize",
       "restart_required": false,
+      "max": 10000,
+      "min": 1000,
       "type": "integer"
     },
     {
@@ -309,15 +357,17 @@
       "type": "integer"
     },
     {
-      "name": "innodb_large_prefix",
+      "name": "innodb_lock_wait_timeout",
       "restart_required": false,
-      "type": "boolean"
+      "max": 1073741824,
+      "min": 1,
+      "type": "integer"
     },
     {
       "name": "innodb_log_buffer_size",
-      "restart_required": true,
+      "restart_required": false,
       "max": 4294967295,
-      "min": 262144,
+      "min": 1048576,
       "type": "integer"
     },
     {
@@ -415,8 +465,8 @@
     },
     {
       "name": "innodb_page_size",
-      "restart_required": false,
-      "type": "string"
+      "restart_required": true,
+      "type": "integer"
     },
     {
       "name": "innodb_purge_rseg_truncate_frequency",
@@ -429,6 +479,13 @@
       "name": "innodb_random_read_ahead",
       "restart_required": false,
       "type": "boolean"
+    },
+    {
+      "name": "innodb_read_io_threads",
+      "restart_required": true,
+      "max": 64,
+      "min": 1,
+      "type": "integer"
     },
     {
       "name": "innodb_read_only",
@@ -500,6 +557,11 @@
       "type": "integer"
     },
     {
+      "name": "innodb_temp_data_file_path",
+      "restart_required": true,
+      "type": "string"
+    },
+    {
       "name": "innodb_thread_concurrency",
       "restart_required": false,
       "max": 1000,
@@ -507,9 +569,16 @@
       "type": "integer"
     },
     {
+      "name": "innodb_write_io_threads",
+      "restart_required": true,
+      "max": 64,
+      "min": 0,
+      "type": "integer"
+    },
+    {
       "name": "interactive_timeout",
       "restart_required": false,
-      "max": 65535,
+      "max": 31536000,
       "min": 1,
       "type": "integer"
     },
@@ -535,8 +604,28 @@
       "type": "integer"
     },
     {
+      "name": "lock_wait_timeout",
+      "restart_required": false,
+      "max": 31536000,
+      "min": 1,
+      "type": "integer"
+    },
+    {
+      "name": "log_error_verbosity",
+      "restart_required": false,
+      "max": 3,
+      "min": 1,
+      "type": "integer"
+    },
+    {
+      "name": "log_queries_not_using_indexes",
+      "restart_required": false,
+      "type": "boolean"
+    },
+    {
       "name": "long_query_time",
       "restart_required": false,
+      "max": 31536000,
       "min": 0,
       "type": "float"
     },
@@ -569,9 +658,23 @@
       "type": "integer"
     },
     {
+      "name": "max_digest_length",
+      "restart_required": true,
+      "max": 1048576,
+      "min": 0,
+      "type": "integer"
+    },
+    {
       "name": "max_prepared_stmt_count",
       "restart_required": false,
       "max": 1048576,
+      "min": 0,
+      "type": "integer"
+    },
+    {
+      "name": "max_sp_recursion_depth",
+      "restart_required": false,
+      "max": 255,
       "min": 0,
       "type": "integer"
     },
@@ -590,9 +693,44 @@
       "type": "integer"
     },
     {
+      "name": "net_read_timeout",
+      "restart_required": false,
+      "max": 31536000,
+      "min": 1,
+      "type": "integer"
+    },
+    {
+      "name": "net_write_timeout",
+      "restart_required": false,
+      "max": 31536000,
+      "min": 1,
+      "type": "integer"
+    },
+    {
+      "name": "ngram_token_size",
+      "restart_required": true,
+      "max": 10,
+      "min": 1,
+      "type": "integer"
+    },
+    {
       "name": "performance_schema",
       "restart_required": true,
       "type": "boolean"
+    },
+    {
+      "name": "read_buffer_size",
+      "restart_required": false,
+      "max": 2147479552,
+      "min": 8192,
+      "type": "integer"
+    },
+    {
+      "name": "read_rnd_buffer_size",
+      "restart_required": false,
+      "max": 2147483647,
+      "min": 1,
+      "type": "integer"
     },
     {
       "name": "server_id",
@@ -602,17 +740,60 @@
       "type": "integer"
     },
     {
-      "name": "sort_buffer_size",
+      "name": "slave_max_allowed_packet",
       "restart_required": false,
-      "max": 18446744073709551615,
-      "min": 32768,
+      "max": 1073741824,
+      "min": 1024,
       "type": "integer"
+    },
+    {
+      "name": "slave_parallel_type",
+      "restart_required": false,
+      "type": "string"
+    },
+    {
+      "name": "slave_parallel_workers",
+      "restart_required": false,
+      "max": 1024,
+      "min": 0,
+      "type": "integer"
+    },
+    {
+      "name": "sql_mode",
+      "restart_required": false,
+      "type": "string"
+    },
+    {
+      "name": "slave_parallel_type",
+      "restart_required": false,
+      "type": "string"
     },
     {
       "name": "sync_binlog",
       "restart_required": false,
       "max": 4294967295,
       "min": 0,
+      "type": "integer"
+    },
+    {
+      "name": "table_open_cache",
+      "restart_required": false,
+      "max": 524288,
+      "min": 1,
+      "type": "integer"
+    },
+    {
+      "name": "thread_cache_size",
+      "restart_required": false,
+      "max": 16384,
+      "min": 0,
+      "type": "integer"
+    },
+    {
+      "name": "tmp_table_size",
+      "restart_required": false,
+      "max": 18446744073709551615,
+      "min": 1024,
       "type": "integer"
     },
     {

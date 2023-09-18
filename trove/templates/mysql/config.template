@@ -42,7 +42,7 @@ open_files_limit = {{ (512 * flavor['ram']/512)|int }}
 max_user_connections = {{ (100 * flavor['ram']/512)|int }}
 max_connections = {{ (100 * flavor['ram']/512)|int }}
 default_storage_engine = innodb
-local-infile = 0
+local_infile = 0
 server_id = {{server_id}}
 performance_schema = ON
 

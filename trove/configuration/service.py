@@ -307,7 +307,7 @@ class ConfigurationsController(wsgi.Controller):
 
             # type checking
             value_type = rule.data_type
-
+            LOG.info(f"v:{type(v)},onfigurationsController._find_type(value_type):{ConfigurationsController._find_type(value_type)}")
             if not isinstance(v, ConfigurationsController._find_type(
                     value_type)):
                 output = {"key": k, "type": value_type}

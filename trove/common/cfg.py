@@ -610,6 +610,8 @@ mysql_opts = [
                help='Default strategy to perform backups.',
                deprecated_name='backup_strategy',
                deprecated_group='DEFAULT'),
+    cfg.BoolOpt('cluster_support', default=True,
+                help='Enable clusters to be created and managed.'),
     cfg.StrOpt('replication_strategy', default='MysqlGTIDReplication',
                help='Default strategy for replication.'),
     cfg.StrOpt('replication_namespace',
