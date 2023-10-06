@@ -2,6 +2,6 @@
 log_bin = /var/lib/mysql/data/mariadb-bin.log
 binlog_format = MIXED
 log_slave_updates = ON
-expire_log_days = 30
+expire_logs_days = 30
 sync_binlog = 1
 slave_compressed_protocol

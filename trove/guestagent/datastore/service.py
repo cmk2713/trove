@@ -428,7 +428,7 @@ class BaseDbApp(object):
         backup_type = 'full'
         if backup_info.get('parent'):
             incremental = (
-                f'--incremental '
+                #f'--incremental '
                 f'--parent-location={backup_info["parent"]["location"]} '
                 f'--parent-checksum={backup_info["parent"]["checksum"]}')
             backup_type = 'incremental'

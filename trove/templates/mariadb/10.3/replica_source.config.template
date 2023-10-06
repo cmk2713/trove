@@ -1,6 +1,0 @@
-[mysqld]
-log_bin = /var/lib/mysql/data/mariadb-bin.log
-binlog_format = MIXED
-log_slave_updates = ON
-sync_binlog = 1
-slave_compressed_protocol

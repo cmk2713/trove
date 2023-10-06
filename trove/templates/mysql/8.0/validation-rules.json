@@ -958,6 +958,11 @@
    "type": "boolean"
   },
   {
+    "name": "log_slow_slave_statements",
+    "restart_required": false,
+    "type": "boolean"
+  },
+  {
    "name": "log_slow_extra",
    "restart_required": false,
    "type": "string"

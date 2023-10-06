@@ -634,14 +634,6 @@ class BaseMySqlApp(service.BaseDbApp):
         for port_range in tcp_ports:
             for port in port_range:
                 ports[f'{port}/tcp'] = port
-        
-        #Override configuration
-        overrides = {}
-        from distutils.version import LooseVersion
-        ver = LooseVersion(ds_version)
-        if ver.version[0] >=8:
-            overrides["default_authentication_plugin"] = "caching_sha2_password"
-        self.update_overrides(overrides)
 
         try:
             docker_util.start_container(
@@ -825,7 +817,7 @@ class BaseMySqlApp(service.BaseDbApp):
         LOG.info("Starting slave replication.")
         with mysql_util.SqlClient(self.get_engine()) as client:
             client.execute('START SLAVE')
-            self.wait_for_slave_status("ON", client, 180)
+            self.wait_for_slave_status("ON", client, 360)
 
     def stop_slave(self, for_failover):
         LOG.info("Stopping slave replication.")
@@ -836,7 +828,7 @@ class BaseMySqlApp(service.BaseDbApp):
             replication_user = result.first()['Master_User']
             client.execute('STOP SLAVE')
             client.execute('RESET SLAVE ALL')
-            self.wait_for_slave_status('OFF', client, 180)
+            self.wait_for_slave_status('OFF', client, 360)
             if not for_failover:
                 client.execute('DROP USER IF EXISTS ' + replication_user)
 
